@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-In order to <receive benefit> as a community member, I can <goal/desire>
+In order to <receive benefit>, as a community member, I can <goal/desire>.

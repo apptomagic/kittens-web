@@ -1,0 +1,10 @@
+{
+  "name": "kittens-web-root",
+  "private": true,
+  "scripts": {
+    "start": "cd packages/kittens-web-server && npm start"
+  },
+  "devDependencies": {
+    "lerna": "^3.15.0"
+  }
+}

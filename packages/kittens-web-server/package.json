@@ -1,0 +1,19 @@
+{
+  "name": "kittens-web-server",
+  "version": "0.0.1",
+  "description": "Simple API proxy for kittens-web",
+  "author": "Lalo Martins <lalo.martins@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-modules index.js"
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-send": "^5.0.0"
+  },
+  "engines": {
+    "node": "^12.4.0"
+  }
+}

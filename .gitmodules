@@ -1,0 +1,3 @@
+[submodule "packages/kittens-web-server/kittens-api"]
+	path = packages/kittens-web-server/kittens-api
+	url = https://github.com/apptomagic/kittens-api.git

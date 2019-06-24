@@ -1,0 +1,14 @@
+{
+  "name": "kittens-web",
+  "version": "0.0.1",
+  "description": "Obviously the world's best discussion platform (web app)",
+  "author": "Lalo Martins <lalo.martins@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "eleventy",
+    "watch": "eleventy --watch"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.8.3"
+  }
+}

@@ -24,18 +24,14 @@ export async function componentServer(ctx, next) {
   }
 }
 
-const FALLBACK_BLACKLIST = [
-  'rpc',
-  'assets',
-  'components',
-];
+const FALLBACK_BLACKLIST = ['rpc', 'assets', 'components'];
 const staticOpts = {
   index: 'index.html',
   root: resolve(process.env.STATIC_ROOT || '../kittens-web/build'),
 };
 
 export async function staticServer(ctx, next) {
-  if (!await maybeSend(ctx, ctx.path, staticOpts)) {
+  if (!(await maybeSend(ctx, ctx.path, staticOpts))) {
     // fallback everything to / and treat it as a SPA (let the front-end deal with 404s)
     const parts = ctx.path.split('/');
     if (FALLBACK_BLACKLIST.includes(parts[1])) {
@@ -48,4 +44,6 @@ export async function staticServer(ctx, next) {
 }
 
 // TODO make nice 404 and 500 pages
-export async function errorPages(ctx, next) {return next();}
+export async function errorPages(ctx, next) {
+  return next();
+}

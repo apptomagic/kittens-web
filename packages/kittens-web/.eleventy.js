@@ -1,6 +1,6 @@
 module.exports = {
   dir: {
-    input: "src",
-    output: "build"
-  }
+    input: 'src',
+    output: 'build',
+  },
 };

@@ -1,0 +1,4 @@
+arrowParens: always
+bracketSpacing: false
+singleQuote: true
+trailingComma: es5

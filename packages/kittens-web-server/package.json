@@ -13,6 +13,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-transform-bare-module-specifiers": "^1.0.2",
+    "grpc": "^1.21.1",
+    "grpc-caller": "^0.12.0",
     "kittens-community-web": "0.0.1"
   },
   "engines": {

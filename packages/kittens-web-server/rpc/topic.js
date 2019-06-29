@@ -1,22 +1,16 @@
 import express from 'express';
+import client from './client.js';
+import {ea} from '../adaptors.js';
 
 const router = express.Router();
+const topicClient = client('topic', 'Topics');
 
-router.get('/AllTopics', function allTopics(req, res) {
-  res.json([
-    'chat',
-    'introductions',
-    'meta',
-    'roadmap',
-    'bugs',
-    'suggestions',
-    'help',
-    'dev-help',
-    'announcements',
-    'documentation',
-    'web',
-    'sandbox',
-  ]);
-});
+router.get(
+  '/AllTopics',
+  ea(async function allTopics(req, res, next) {
+    const topicList = await topicClient.allTopics();
+    res.json(topicList.topics);
+  })
+);
 
 export default router;

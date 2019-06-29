@@ -32,28 +32,18 @@ class TopicsListing extends LitElement {
     `;
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
     if (this.topics === null) {
       console.log('fetch topics from rpc');
       this.topics = [];
-      setTimeout(() => {
+      const res = await fetch('/rpc/kittens.topic.Topics/AllTopics');
+      if (res.status === 200) {
+        this.topics = await res.json();
         this.loading = false;
-        this.topics = [
-          'chat',
-          'introductions',
-          'meta',
-          'roadmap',
-          'bugs',
-          'suggestions',
-          'help',
-          'dev-help',
-          'announcements',
-          'documentation',
-          'web',
-          'sandbox',
-        ];
-      }, 1000);
+      } else {
+        console.error('Failed to fetch data', res);
+      }
     } else {
       this.loading = false;
     }

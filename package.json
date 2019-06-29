@@ -15,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx -p prettier -p pretty-quick pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged"
     }
   }
 }

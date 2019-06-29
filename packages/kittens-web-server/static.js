@@ -1,49 +1,50 @@
-import {resolve} from 'path';
+import {dirname, resolve} from 'path';
+import {fileURLToPath} from 'url';
+import express from 'express';
+import etbms from 'express-transform-bare-module-specifiers';
+const transformMiddleware = typeof etbms === 'function' ? etbms : etbms.default;
 
-import send from 'koa-send';
-
-// Wrapper for send() that returns false on 404
-async function maybeSend(ctx, path, opts) {
-  try {
-    return await send(ctx, path, opts);
-  } catch (err) {
-    if (err.status === 404) {
-      return false;
-    } else {
-      throw err;
-    }
-  }
+export async function faviconServer(req, res) {
+  res.redirect(301, '/assets/favicon.ico');
+  res.send('Please see /assets/favicon.ico');
 }
 
-export async function componentServer(ctx, next) {
-  const parts = ctx.path.split('/');
-  if (parts[1] === 'components') {
-    // TODO
-  } else {
-    return next();
-  }
-}
+const COMPONENT_ROOT = resolve(
+  dirname(fileURLToPath(import.meta.url)) + '/node_modules'
+);
+const transformComponent = transformMiddleware({
+  rootDir: COMPONENT_ROOT,
+  modulesUrl: '/components',
+});
+export const componentServer = express.Router();
+componentServer.use(transformComponent);
+componentServer.use(express.static(COMPONENT_ROOT));
 
 const FALLBACK_BLACKLIST = ['rpc', 'assets', 'components'];
-const staticOpts = {
-  index: 'index.html',
-  root: resolve(process.env.STATIC_ROOT || '../kittens-web/build'),
-};
+const STATIC_ROOT = resolve(process.env.STATIC_ROOT || '../kittens-web/build');
 
-export async function staticServer(ctx, next) {
-  if (!(await maybeSend(ctx, ctx.path, staticOpts))) {
-    // fallback everything to / and treat it as a SPA (let the front-end deal with 404s)
-    const parts = ctx.path.split('/');
-    if (FALLBACK_BLACKLIST.includes(parts[1])) {
-      return next();
-    } else {
-      console.log(`Falling back for ${ctx.path}`);
-      return (await maybeSend(ctx, '/', staticOpts)) || next();
-    }
+export const staticServer = express.static(STATIC_ROOT);
+
+export function fallbackServer(req, res, next) {
+  const parts = req.path.split('/');
+  if (FALLBACK_BLACKLIST.includes(parts[1])) {
+    return next();
+  } else {
+    console.log(`Falling back for ${req.path}`);
+    req.originalUrl = req.url = '/';
+    return staticServer(req, res, next);
   }
 }
 
 // TODO make nice 404 and 500 pages
-export async function errorPages(ctx, next) {
+export function errorPages(req, res, next) {
   return next();
+}
+
+export function setupStatic(app) {
+  app.use('/components', componentServer);
+  app.use(staticServer);
+  app.get('/favicon.ico', faviconServer);
+  app.use(fallbackServer);
+  // app.use(errorPages);
 }

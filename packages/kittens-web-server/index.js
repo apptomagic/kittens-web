@@ -1,12 +1,9 @@
-import Koa from 'koa';
+import express from 'express';
 
-import {componentServer, staticServer, errorPages} from './static.js';
+import {setupStatic} from './static.js';
 
-const app = new Koa();
+const app = express();
 
-app.use(componentServer);
-app.use(staticServer);
-app.use(errorPages);
+setupStatic(app);
 
-app.listen(3000);
-console.log('Server running at http://localhost:3000/');
+app.listen(3000, () => console.log('Server running at http://localhost:3000/'));

@@ -7,11 +7,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules index.js"
+    "start": "node --experimental-modules index.js",
+    "debug": "node --experimental-modules --inspect-brk index.js"
   },
   "dependencies": {
-    "koa": "^2.7.0",
-    "koa-send": "^5.0.0"
+    "express": "^4.17.1",
+    "express-transform-bare-module-specifiers": "^1.0.2",
+    "kittens-community-web": "0.0.1"
   },
   "engines": {
     "node": "^12.4.0"

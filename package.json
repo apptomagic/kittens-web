@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "start": "cd packages/kittens-web-server && npm start",
+    "debug": "cd packages/kittens-web-server && npm run debug",
     "prettier-check": "prettier --check **/*.js",
     "prettier-fix": "prettier --write **/*.js"
   },
@@ -14,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "npx -p prettier -p pretty-quick pretty-quick --staged"
     }
   }
 }

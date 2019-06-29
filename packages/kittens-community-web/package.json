@@ -1,0 +1,16 @@
+{
+  "name": "kittens-community-web",
+  "version": "0.0.1",
+  "description": "Kittens community UI components",
+  "author": "Lalo Martins <lalo.martins@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "lit-element": "^2.2.0"
+  },
+  "engines": {
+    "node": "^12.4.0"
+  }
+}

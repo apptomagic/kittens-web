@@ -1,4 +1,4 @@
-import {LitElement, html} from 'lit-element';
+import {LitElement, html, css} from 'lit-element';
 
 class TopicsListing extends LitElement {
   static get properties() {
@@ -12,6 +12,15 @@ class TopicsListing extends LitElement {
     super();
     this.topics = null;
     this.loading = true;
+  }
+
+  static get styles() {
+    return css`
+      a:link:not(:hover),
+      a:visited:not(:hover) {
+        text-decoration: none;
+      }
+    `;
   }
 
   render() {

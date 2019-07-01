@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   id="line"
+   version="1.1"
+   height="5"
+   width="743">
+  <path
+     id="line-hatch"
+     d="M 0,2.9490947 C 180.37205,2.2578816 363.09309,-1.1495234 742.97928,5 M 0.1499233,3.8325311 C 183.06499,0.05607962 363.02958,-0.27635382 742.40915,3.8001499" />
+</svg>

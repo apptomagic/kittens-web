@@ -10,6 +10,46 @@ html(lang="en")
     base(href="/")
     link(rel="icon", href="/assets/favicon.ico")
     meta(name="theme-color", content="black")
-    script(type='module' src='/components/kittens-community-web/index.js')
+    script(src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.js")
+    script(type="module" src="/components/@polymer/app-layout/app-layout.js")
+    script(type="module" src="/components/kittens-community-web/index.js")
+    style.
+      body {
+        font-family: sans-serif;
+        line-height: 1.5;
+        --app-primary-color: #404040;
+        --card-secondary-color: #dcdccd;
+      }
+      app-header {
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--app-primary-color);
+        border-image-source: url(/assets/line.svg);
+        border-image-slice: 0 0 5 0;
+        border-image-width: 0 0 5 0;
+        background-color: var(--card-secondary-color);
+      }
+      app-toolbar div[main-title] img {
+        vertical-align: middle;
+        margin-right: 1em;
+      }
+      app-header-layout > div {
+        margin: 10px;
+      }
+      wired-card {
+        max-width: 100%;
+      }
+      .card-grid {
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(3, 1fr);
+      }
     title Kittens
-  body!= content
+  body
+    app-header-layout(fullbleed)
+      app-header(slot="header", fixed)
+        app-toolbar
+          div(main-title)
+            img(src="assets/1f639-32.png" alt="Kittens logo" height=32 width="auto")
+            | Kittens
+      div!= content

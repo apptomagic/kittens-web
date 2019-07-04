@@ -13,4 +13,12 @@ router.get(
   })
 );
 
+router.get(
+  '/Related',
+  ea(async function related(req, res, next) {
+    const topicList = await topicClient.related({name: req.query.name});
+    res.json(topicList.topics);
+  })
+);
+
 export default router;
